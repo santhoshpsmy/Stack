@@ -1,0 +1,25 @@
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length()%2!=0||s.charAt(0)=='}'||s.charAt(0)==']'||s.charAt(0)==')'){
+            return false;
+        }
+        Stack<Character> stk = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if(!stk.isEmpty()){
+                char temp=stk.peek();
+                if(solution(temp,c)){
+                    stk.pop();
+                    continue;
+                }
+            }
+            stk.push(c);
+        }
+        return stk.isEmpty();
+    }
+    public boolean solution(char prev,char curr){
+        return (prev=='{'&&curr=='}')||
+               (prev=='('&&curr==')')||
+               (prev=='['&&curr==']');
+    }
+}
